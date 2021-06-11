@@ -1,38 +1,89 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+
+:root {
+    --primary-white: #e7e6d3f3;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    font-family: "Helvetica", sans-serif !important;  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.main {
+    margin: 2rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+nav a.nav-link {
+    
+    letter-spacing: 0.0375rem;
+    cursor: pointer;
+ }
+
+.logo {
+    width: 100px;
 }
 
-.App-link {
-  color: #61dafb;
+nav ul li {
+    
+    font-size: small;
+    
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar-nav > li > a {
+    color: var(--primary-white) !important;
+    margin-left: 12px;
+    margin-right: 12px;
+    font-size: larger;
+    border-bottom: 2px solid black;
 }
+
+.navbar-brand {
+    max-width: 140px !important;
+    padding: 0 !important;
+    height: 28px;
+}
+
+
+
+.navbar-nav > li > a:hover {
+    border-bottom: 2px solid orange;
+}
+
+.navbar-toggler.focus, .navbar-toggler:focus {
+    
+    outline: none;
+    box-shadow: none !important;
+}
+
+.row ul li {
+    background-color: black !important;
+    color: white;
+    padding: 2px;
+}
+
+.row a {
+    background-color: black;
+    color: rgb(202, 177, 177);
+    text-decoration: none;
+    
+}
+
+.row a:hover {
+    color:rgb(239, 248, 245) ;
+}
+
+.main-footer {
+    background-color: black;
+}
+
+@media screen and (max-width: 991px) {
+    .row ul li {
+        
+        padding: 0px;
+    }
+}
+
+.img2 {
+    width: 300px;
+    background-color: white;
+}
+

@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 export class VisitorForm extends Component {
 
     
-    visitorData;
+    visitorData = {};
 
     constructor(props) {
         super(props)
@@ -23,7 +23,21 @@ export class VisitorForm extends Component {
     submitHandler = (e) => {
         e.preventDefault()
         console.log("submitted", this.state)
-        localStorage.setItem('HighestId', this.state.id+1)      
+        localStorage.setItem('HighestId', this.state.id + 1)
+        if (this.visitorData) {
+            this.setState({
+                name: this.visitorData.name,
+                email: this.visitorData.email,
+                file: this.visitorData.file,
+                tvisit: this.visitorData.tvisit,
+                person: this.visitorData.person,
+                date: this.visitorData.date,
+                entrytime: this.visitorData.entrytime,
+                exittime: this.visitorData.exittime,
+            })
+        }
+        else this.visitorData = {}
+
         this.setState({
             name: '',
             email: '',
@@ -38,39 +52,36 @@ export class VisitorForm extends Component {
     }
 
     componentDidMount() {
-        let id1 = localStorage.getItem('HighestId')
-        if (id1 != null) {
-            this.setState({
-                id: Number(id1)
-            })
-        
-        }
-    }
+            }
 
     
     componentDidUpdate(nextProps, nextState) {
-         localStorage.setItem(this.state.id.toString(), JSON.stringify(nextState));
-     }
-    
+        localStorage.setItem(this.state.id.toString(), JSON.stringify(nextState));
+
+        this.visitorData = JSON.parse(localStorage.getItem('0'))
+        console.log(this.visitorData.name)
+                
+    }
 
     render() {
         var curr = new Date();
         var date1 = curr.toISOString().substr(0, 10);
-        var viData = localStorage.getItem('1')
-        var viData1 = JSON.parse(viData)
+        var viData = JSON.parse(localStorage.getItem('1'))
+        var Hid = JSON.parse(localStorage.getItem('HighestId'))
+        
         return (
             <div className="container">
                <form className="form-group" onSubmit={this.submitHandler}> 
                 <div className="mb-3 mt-2 w-50">
-                    <label htmlFor="Input1" className="form-label">Name:</label>
+                    <label htmlFor="name" className="form-label">Name:</label>
                         <input type="text" value={ this.state.name } id="name" className="form-control" onChange={this.changeHandler} placeholder="Name"/>
                 </div>
                 <div className="mb-3 mt-2 w-50">
-                    <label htmlFor="Input2" className="form-label">Email address</label>
+                    <label htmlFor="email" className="form-label">Email address</label>
                     <input type="email" id="email" value={ this.state.email } onChange={this.changeHandler} className="form-control" placeholder="name@example.com"/>
                 </div>
                 <div className="mb-3 w-50">
-                    <label htmlFor="formFile" className="form-label">Upload Selfie</label>
+                    <label htmlFor="file" className="form-label">Upload Selfie</label>
                     <input className="form-control" value={ this.state.file } id="file" onChange={this.changeHandler} type="file" />
                 </div>
                 <select className="w-50 mb-3 form-select" value={ this.state.tvisit } id="tvisit" aria-label="Default select example" onChange={this.changeHandler} >
@@ -97,12 +108,8 @@ export class VisitorForm extends Component {
                 </div>
                 <button className="btn btn-primary mb-3">Submit</button>    
               </form>
-                <div>
-                    {
-                       //viData1.id ? (<div>{viData1.id}</div>) : null
-                        
-                    }
-                </div>
+                <h3>{viData ? (viData.name) : "Nothing is here"}</h3>
+                <h2>{ this.state.name }</h2>
             </div>
         )
     }

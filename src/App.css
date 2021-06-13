@@ -87,3 +87,10 @@ nav ul li {
     background-color: white;
 }
 
+.co {
+    color: red !important;
+}
+
+label {
+    color: white;
+}

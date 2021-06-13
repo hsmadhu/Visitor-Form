@@ -1,15 +1,13 @@
 
-import React, { Component } from 'react'
+import React, { Component, memo } from 'react'
+import FromLocal from './FromLocal';
 
 export class VisitorForm extends Component {
-
-    
-    visitorData = {};
 
     constructor(props) {
         super(props)
     
-        this.state = {name: '', email: '', file: '', tvisit: '', person: '', date: '', entrytime: '', exittime: '', id: 0 }
+        this.state = {name: '', email: '', file: '', tvisit: '', person: '', date: null, entrytime: '', exittime: '', id: 1 }
     }
     
     changeHandler = (e) => {
@@ -18,26 +16,31 @@ export class VisitorForm extends Component {
             [e.target.id]: e.target.value
         })
     }
-    
+        
+    dateHandler = (e) => {
+        
+        this.setState({
+            date: e.target.value
+        })
+    }
 
+    entimeHandler = (e) => {
+        console.log("time",e.target.value)
+        this.setState({
+            entrytime: e.target.value
+        })
+    }
+
+    extimeHandler = (e) => {
+        this.setState({
+            exittime: e.target.value
+        })
+    }
+    
     submitHandler = (e) => {
         e.preventDefault()
         console.log("submitted", this.state)
-        localStorage.setItem('HighestId', this.state.id + 1)
-        if (this.visitorData) {
-            this.setState({
-                name: this.visitorData.name,
-                email: this.visitorData.email,
-                file: this.visitorData.file,
-                tvisit: this.visitorData.tvisit,
-                person: this.visitorData.person,
-                date: this.visitorData.date,
-                entrytime: this.visitorData.entrytime,
-                exittime: this.visitorData.exittime,
-            })
-        }
-        else this.visitorData = {}
-
+        localStorage.setItem('Highestid', Number(this.state.id) + 1)
         this.setState({
             name: '',
             email: '',
@@ -47,72 +50,76 @@ export class VisitorForm extends Component {
             date: '',
             entrytime: '',
             exittime: '',
-            id: this.state.id+1
+            id: Number(this.state.id) + 1
         })
     }
 
     componentDidMount() {
-            }
-
+        
+        if (localStorage.getItem('Highestid')) {
+            this.setState({
+                id: localStorage.getItem('Highestid')
+            })
+        }
+        else {
+            localStorage.setItem('Highestid', 1)
+        }
+    }
     
     componentDidUpdate(nextProps, nextState) {
-        localStorage.setItem(this.state.id.toString(), JSON.stringify(nextState));
-
-        this.visitorData = JSON.parse(localStorage.getItem('0'))
-        console.log(this.visitorData.name)
-                
+        localStorage.setItem(Number(this.state.id), JSON.stringify(nextState));
     }
-
+    
     render() {
-        var curr = new Date();
-        var date1 = curr.toISOString().substr(0, 10);
-        var viData = JSON.parse(localStorage.getItem('1'))
-        var Hid = JSON.parse(localStorage.getItem('HighestId'))
-        
+        var curr = new Date()
+        var date1 = curr.toISOString().substr(0, 10)
+        console.log("Date ..", date1)
         return (
-            <div className="container">
+            <div className="container-fluid bg-info p-3">
                <form className="form-group" onSubmit={this.submitHandler}> 
-                <div className="mb-3 mt-2 w-50">
+                <div className="mb-3 mt-2 w-50" style={{margin: "auto"}}>
                     <label htmlFor="name" className="form-label">Name:</label>
                         <input type="text" value={ this.state.name } id="name" className="form-control" onChange={this.changeHandler} placeholder="Name"/>
                 </div>
-                <div className="mb-3 mt-2 w-50">
+                <div className="mb-3 mt-2 w-50" style={{margin: "auto"}}>
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input type="email" id="email" value={ this.state.email } onChange={this.changeHandler} className="form-control" placeholder="name@example.com"/>
                 </div>
-                <div className="mb-3 w-50">
+                <div className="mb-3 w-50" style={{margin: "auto"}}>
                     <label htmlFor="file" className="form-label">Upload Selfie</label>
                     <input className="form-control" value={ this.state.file } id="file" onChange={this.changeHandler} type="file" />
                 </div>
-                <select className="w-50 mb-3 form-select" value={ this.state.tvisit } id="tvisit" aria-label="Default select example" onChange={this.changeHandler} >
+                <select className="w-50 mb-3 form-select" style={{margin: "auto"}} value={ this.state.tvisit } id="tvisit" aria-label="Default select example" onChange={this.changeHandler} >
                     <option>Type of Visit</option>
                     <option value="Meeting">Meeting</option>
                     <option value="Delivery">Delivery</option>
                     <option value="Personal">Personal</option>
                 </select>
-                <div className="mb-3 mt-2 w-50">
-                    <label htmlFor="Input3" className="form-label">Person to Visit</label>
+                <div className="mb-3 mt-2 w-50" style={{margin: "auto"}}>
+                    <label htmlFor="person" className="form-label">Person to Visit</label>
                     <input type="text" id="person" value={ this.state.person } onChange={this.changeHandler} className="form-control"  placeholder="Person"/>
                 </div>
-                <div className="mb-3 mt-2 w-50">
-                    <label htmlFor="Input4" className="form-label">Date of Visit</label>
-                    <input type="date" defaultValue={date1} onChange={this.changeHandler} className="form-control" id="date" placeholder="Date"/>
+                <div className="mb-3 mt-2 w-50" style={{margin: "auto"}}>    
+                    <label htmlFor="date" className="form-label">Date of Visit</label>    
+                    <input type="date" id="date" onChange={this.dateHandler} 
+                     min={date1} max={date1} className="form-control" />
                 </div>
-                <div className="mb-3 mt-2 w-50">
-                    <label htmlFor="Input5" className="form-label">Time of Entry</label>
-                    <input type="time" id="entrytime" value={ this.state.entrytime } onChange={this.changeHandler} className="form-control" />
+                <div className="mb-3 mt-2 w-50" style={{margin: "auto"}}>    
+                    <label htmlFor="entrytimedp" className="form-label">Entry Time</label>    
+                    <input id="entrytimedp" type="time" onChange={this.entimeHandler } className="form-control" />
                 </div>
-                <div className="mb-3 mt-2 w-50">
-                    <label htmlFor="Input6" className="form-label">Time of Exit</label>
-                    <input type="time" id="exittime" value ={ this.state.exittime } className="form-control" onChange={ this.changeHandler}/>
-                </div>
-                <button className="btn btn-primary mb-3">Submit</button>    
+                <div className="mb-3 mt-2 w-50" style={{margin: "auto"}}>    
+                    <label htmlFor="exittimedp" className="form-label">Exit Time</label>    
+                    <input id="exittimedp" type="time" onChange={this.extimeHandler} className="form-control" />
+                </div>    
+                <div className="d-flex">
+                        <button className="btn btn-primary mb-3 ms-auto">Submit</button>
+                </div>        
               </form>
-                <h3>{viData ? (viData.name) : "Nothing is here"}</h3>
-                <h2>{ this.state.name }</h2>
+              <FromLocal />  
             </div>
         )
     }
 }
 
-export default VisitorForm
+export default memo(VisitorForm)

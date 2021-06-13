@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, memo } from 'react';
+
 
 class Home extends Component {
 
@@ -57,6 +58,7 @@ class Home extends Component {
     }
 
     onChangeDate(e) {
+        console.log("Home date", e.target.value)
         this.setState({ date: e.target.value })
     }
 
@@ -87,7 +89,7 @@ class Home extends Component {
     // React Life Cycle
     componentDidMount() {
         this.userData = JSON.parse(localStorage.getItem('user'));
-        console.log(this.userData.name)
+        
         if (localStorage.getItem('user')) {
             this.setState({
                 name: this.userData.name,
@@ -165,10 +167,12 @@ class Home extends Component {
                         <label>Exit Time</label>
                         <input type="text" className="form-control" value={this.state.exittime} onChange={this.onChangeExittime} />
                     </div>
-                    <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                    <button type="submit" className="btn btn-primary btn-block mb-3 mt-3 ">Submit</button>
                 </form>
+                <h2 className="mb-3 text-center">List of Visitors</h2>
+                
             </div>
         )
     }
 }
-export default Home
+export default memo(Home)

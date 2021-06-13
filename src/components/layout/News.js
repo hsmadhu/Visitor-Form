@@ -14,7 +14,6 @@ class News extends Component {
     componentDidMount() {
         axios.get("https://newsapi.org/v2/everything?q=bitcoin&from=2021-05-20&sortBy=publishedAt&apiKey=1848b5465b1449d78d10c2991b1bea98")
             .then(res => {
-                console.log(res.data)
                 this.setState({
                     newslists: res.data.articles
                 })

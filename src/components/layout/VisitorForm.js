@@ -94,7 +94,11 @@ export class VisitorForm extends Component {
                 </div>
                 <div className="mb-3 w-50" style={{margin: "auto"}}>
                     <label htmlFor="file" className="form-label">Upload Selfie</label>
+<<<<<<< HEAD
                     <InputTypes she={this.get_url.bind(this)} />
+=======
+                    <input className="form-control" value={ this.state.file } id="file" onChange={this.changeHandler} type="file" accept="image/*" capture="user" />
+>>>>>>> 00457d131ba7c9af748340137d43f789d13cd08a
                 </div>
                 <select className="w-50 mb-3 form-select" style={{margin: "auto"}} value={ this.state.tvisit } id="tvisit" aria-label="Default select example" onChange={this.changeHandler} >
                     <option>Type of Visit</option>
@@ -108,7 +112,7 @@ export class VisitorForm extends Component {
                 </div>
                 <div className="mb-3 mt-2 w-50" style={{margin: "auto"}}>    
                     <label htmlFor="date" className="form-label">Date of Visit</label>    
-                    <input type="date" id="date" onChange={this.dateHandler} 
+                    <input type="date" id="date" min={date1} max={date1} onChange={this.dateHandler} 
                      min={date1} max={date1} className="form-control" />
                 </div>
                 <div className="mb-3 mt-2 w-50" style={{margin: "auto"}}>    

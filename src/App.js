@@ -11,6 +11,8 @@ import News from './components/layout/News'
 import VisitorForm from './components/layout/VisitorForm'
 import FormikExample from './components/FormikExample';
 
+import InputTypes from './components/InputTypes';
+
 
 
 function App() {
@@ -20,7 +22,8 @@ function App() {
         
           <Route exact path="/" component={ FormikExample } />
           <Route path="/visitor" component={ VisitorForm }/>
-          <Route path="/latestnews" component={ News }/>
+          <Route path="/latestnews" component={News} />
+          <Route path="/inputtypes" component={ InputTypes }/>
               
     </BrowserRouter>
   )

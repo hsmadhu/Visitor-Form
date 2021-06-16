@@ -4,6 +4,7 @@ import { BrowserRouter, Link } from 'react-router-dom'
 import News from './components/layout/News'
 import FormikExample from './FormikExample'
 import VisitorForm from './layout/VisitorForm'
+import InputTypes from './InputTypes'
 
 
 export class Navbar extends Component {
@@ -13,7 +14,7 @@ export class Navbar extends Component {
                 <FormikExample />
                 <News />
                 <VisitorForm />
-                
+                <InputTypes />
             </BrowserRouter>
         )
     }

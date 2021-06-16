@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 
 :root {
     --primary-white: #e7e6d3f3;
@@ -93,4 +94,56 @@ nav ul li {
 
 label {
     color: white;
+}
+
+span {
+    margin-right: 1rem;
+}
+
+.selfie {
+    display: flex;
+    justify-content: center;
+}
+
+.cam, .preview {
+    position: relative;
+}
+
+.preview-img {
+    display: block;
+}
+
+.capture-btn {
+    position: absolute;
+    bottom: 9px;
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+    background: none;
+    color: #fff;
+    border: none;
+    font-size: 40px;
+}
+
+.video-player {
+    display: block;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.back-btn, .download-btn {
+    background: none;
+    color: #fff;
+    border: none;
+    font-size: 40px;
+}
+
+.download-btn {
+    margin-left: 25px;
 }

@@ -30,6 +30,7 @@ function FromLocal() {
                             <th scope="col">Type</th>
                             <th scope="col">Person</th>
                             <th scope="col">Date</th>
+                            <th scope="col">Photo</th>        
                             <th scope="col">Entry time</th>
                             <th scope="col">Exit time</th>
                         </tr>
@@ -46,7 +47,8 @@ function FromLocal() {
                                                 <td>{row1.tvisit}</td>
                                                 <td>{row1.person }</td>
                                                 <td>{row1.date}</td>
-                                                <td>{row1.entrytime}</td>
+                                                <td><img src={row1.file} alt = '' /></td>
+                                               <td>{row1.entrytime}</td>
                                                 <td>{row1.exittime}</td>    
                                             </tr>
                                         </tbody> ) : (<tbody key={Math.random}><tr><td>Nothing else</td></tr></tbody>)

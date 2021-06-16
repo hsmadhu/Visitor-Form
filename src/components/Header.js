@@ -4,9 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faLandmark } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 
-
-
-
 function Header() {
  return (
    <div className="header-main">
@@ -30,8 +27,9 @@ function Header() {
             </li>
             
              <li className="nav-item">
-              <Link to="/latestnews" className="nav-link" aria-current="page" href="/">Latest News</Link>
-            </li>
+              <Link to="/latestnews" className="nav-link" aria-current="page">Latest News</Link>
+             </li>
+             
             
            </ul>
            

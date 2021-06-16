@@ -24,13 +24,15 @@ const initialValues = {
 function FormikExample() {
   const [entrytime, setEntryTime] = useState(null)
   const [date, setDate] = useState(null)
+  var curr = new Date()
+  var date1 = curr.toISOString().substr(0, 10)
      
     return (
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
           <Form className="form-control center bg-info">
               <div className="form-group w-50 mb-3" style= {{margin: "auto"}} >
                 <label htmlFor="first_name">First name</label>
-                <Field type="text" name="first_name" id="first_name" autoComplete="given-name" className="form-control" />
+                <Field type="text" name="first_name" id="first_name" autoComplete="given-name" placeholder="First Name" className="form-control" />
                 <ErrorMessage name='first_name'>
                             {(errMsg) => <div className="co">{errMsg}</div>}
                 </ErrorMessage>
@@ -56,13 +58,35 @@ function FormikExample() {
           
               <div className="form-group w-50 mb-3" style= {{margin: "auto"}}>
                 <label htmlFor="date">Date</label>
-                <input type="date" name="date" min={new Date()} id="date" onChange={e => setDate({ date: e.target.value })} autoComplete="date" className="form-control"/>
+                <input type="datetime-local" defaultValue={date1} name="date" id="date" onChange={e => { setDate({ date: e.target.value }); console.log("date ... . ", e.target.value) }} autoComplete="date" className="form-control"/>
               </div>
               <div className="form-group w-50 mb-3" style= {{margin: "auto"}}>
                 <label htmlFor="entrytime">Entry Time</label>
                 <input type="time" name="entrytime" id="entrytime" onChange={e=>setEntryTime(e.target.value)} autoComplete="entrytime" className="form-control"/>
               </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+
+          <div class="row g-4">
+            <div class="col-md">
+              <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInputGrid" placeholder="name@example.com" value="mdo@example.com"/>
+                <label for="floatingInputGrid" style= {{color:"black"}} >Email address</label>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-floating">
+                <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+                <label for="floatingSelectGrid" style={{color: "black"}}>Works with selects</label>
+              </div>
+            </div>
+          </div>
+          <div className="d-flex justify-content-center">
+             <button type="submit" className="btn btn-primary mt-4 m-auto">Submit</button>
+          </div>
             <Persist name="signup-form" />
         </Form>
       </Formik>
